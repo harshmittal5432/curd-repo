@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Card from "./Card";
 
 const Curd = () => {
   const [posts, setPosts] = useState([]);
@@ -94,32 +95,67 @@ const Curd = () => {
 
 
   }
+  const formStyles = {
+    width: "80%",
+    maxWidth: "600px",
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    marginBottom: "20px",
+  };
+  const buttonStyles = {
+    width: "100%",
+    padding: "10px",
+    marginTop: "10px",
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  };
+  const containerStyles = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "100vh",
+  };
 
   return (
-    <div>
+    <div style={containerStyles}>
       <h1 style={headingStyles}>CRUD App with React and JSONPlaceholder</h1>
-      <form onSubmit={handleSubmit}>
+      <form style={formStyles} onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          style={{ marginBottom: "10px", width: "100%", padding: "10px" }}
         />
         <textarea
           placeholder="Body"
           value={body}
           onChange={(e) => setBody(e.target.value)}
+          style={{ marginBottom: "10px", width: "100%", padding: "10px" }}
         ></textarea>
-        <button type="submit">{editId ? "Update" : "Add"} Post</button>
+        <button type="submit" style={buttonStyles}>{editId ? "Update" : "Add"} Post</button>
       </form>
       <ul>
         {posts.map((post) => (
-          <li type="1" key={post.id}>
+          /*<li type="1" key={post.id}>
             <h2>{post.title}</h2>
             <p>{post.body}</p>
             <button onClick={() => handleEdit(post)}>Edit</button>
             <button onClick={() => handleDelete(post.id)}>Delete</button>
-          </li>
+          </li>*/
+         
+          <li key={post.id}>
+          <Card post={post} onEdit={handleEdit} onDelete={handleDelete} />
+         
+        </li>
+          
+          
+          
         ))}
       </ul>
       {openpopup && (
@@ -128,6 +164,7 @@ const Curd = () => {
             <h3>Are you sure you want to delete this post?</h3>
             <button onClick={()=>deletePost(deleteId)}>Yes</button>
             <button onClick={closePopup}>No</button>
+
           </div>
         </div>
       )};
