@@ -120,11 +120,12 @@ const Curd = () => {
     justifyContent: "center",
     minHeight: "100vh",
   };
-
+  const isFormValid = title.trim() !== '' && body.trim() !== '';
   return (
     <div style={containerStyles}>
       <h1 style={headingStyles}>CRUD App with React and JSONPlaceholder</h1>
       <form style={formStyles} onSubmit={handleSubmit}>
+      <div className='container'>
         <input
           type="text"
           placeholder="Title"
@@ -138,7 +139,8 @@ const Curd = () => {
           onChange={(e) => setBody(e.target.value)}
           style={{ marginBottom: "10px", width: "100%", padding: "10px" }}
         ></textarea>
-        <button type="submit" style={buttonStyles}>{editId ? "Update" : "Add"} Post</button>
+        <button disabled={!isFormValid} type="submit" style={buttonStyles}>{editId ? "Update" : "Add"} Post</button>
+        </div>
       </form>
       <ul>
         {posts.map((post) => (

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -32,6 +33,12 @@ const ContactForm = () => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       setIsSubmitted(true);
+      Swal.fire({
+        title: 'Success!',
+        text: 'Your form has been submitted successfully.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
     }
   };
   const handleReset = () => {
