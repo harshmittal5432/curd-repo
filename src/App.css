@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   height: 100%;
+  background-color: black;
 }
 
 .App-logo {
@@ -133,6 +134,22 @@ button:hover {
 
 .popup-content button:hover {
   background-color: #0056b3;
+}
+.card-container {
+ 
+  display: flex;
+  flex-wrap: wrap; /* Ensures cards will wrap to the next line */
+  margin: 10px -5px;
+}
+.card {
+  
+  flex: 1 0 48%; /* Ensure each card takes up 48% of the width */
+  margin: 10px 5px; /* Top and bottom margin for spacing */
+  box-sizing: border-box;
+  background-color: rgb(0, 255, 102); /* Add a background color for visibility */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
 }
 
 

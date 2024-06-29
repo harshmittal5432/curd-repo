@@ -10,9 +10,9 @@ const Curd = () => {
   const [openpopup, setpopup] = useState(false);
   // eslint-disable-next-line
   const [deleteId, setDeleteId] = useState(null);
-  const [successdel,setsuccessdel]=useState(false);
-  const [successadd,setsuccessadd]=useState(false);
-  const [successupdate,setsuccessupdate]=useState(false);
+  const [successdel, setsuccessdel] = useState(false);
+  const [successadd, setsuccessadd] = useState(false);
+  const [successupdate, setsuccessupdate] = useState(false);
 
   // This useEffect runs once after the initial render
   useEffect(() => {
@@ -78,11 +78,10 @@ const Curd = () => {
   };
 
   const headingStyles = {
-    color: "blue",
+    color: "red",
     textAlign: "center",
   };
-  const reset=()=>{
-    
+  const reset = () => {
     setTitle("");
     setBody("");
     setEditId(null);
@@ -91,10 +90,7 @@ const Curd = () => {
     setsuccessdel(false);
     setsuccessadd(false);
     setsuccessupdate(false);
-
-
-
-  }
+  };
   const formStyles = {
     width: "80%",
     maxWidth: "600px",
@@ -120,29 +116,32 @@ const Curd = () => {
     justifyContent: "center",
     minHeight: "100vh",
   };
-  const isFormValid = title.trim() !== '' && body.trim() !== '';
+  const isFormValid = title.trim() !== "" && body.trim() !== "";
   return (
     <div style={containerStyles}>
       <h1 style={headingStyles}>CRUD App with React and JSONPlaceholder</h1>
       <form style={formStyles} onSubmit={handleSubmit}>
-      <div className='container'>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ marginBottom: "10px", width: "100%", padding: "10px" }}
-        />
-        <textarea
-          placeholder="Body"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          style={{ marginBottom: "10px", width: "100%", padding: "10px" }}
-        ></textarea>
-        <button disabled={!isFormValid} type="submit" style={buttonStyles}>{editId ? "Update" : "Add"} Post</button>
+        <div className="container">
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ marginBottom: "10px", width: "100%", padding: "10px" }}
+          />
+          <textarea
+            placeholder="Body"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            style={{ marginBottom: "10px", width: "100%", padding: "10px" }}
+          ></textarea>
+          <button disabled={!isFormValid} type="submit" style={buttonStyles}>
+            {editId ? "Update" : "Add"} Post
+          </button>
         </div>
       </form>
       <ul>
+      <div className="row">
         {posts.map((post) => (
           /*<li type="1" key={post.id}>
             <h2>{post.title}</h2>
@@ -150,50 +149,44 @@ const Curd = () => {
             <button onClick={() => handleEdit(post)}>Edit</button>
             <button onClick={() => handleDelete(post.id)}>Delete</button>
           </li>*/
-         
-          <li key={post.id}>
-          <Card post={post} onEdit={handleEdit} onDelete={handleDelete} />
-         
-        </li>
-          
-          
-          
+
+          <li   className="col-md-4 mb-4" key={post.id}>
+            <Card post={post} onEdit={handleEdit} onDelete={handleDelete} />
+          </li>
         ))}
+        </div>
       </ul>
       {openpopup && (
-          <div className="popup">
+        <div className="popup">
           <div className="popup-content">
             <h3>Are you sure you want to delete this post?</h3>
-            <button onClick={()=>deletePost(deleteId)}>Yes</button>
+            <button onClick={() => deletePost(deleteId)}>Yes</button>
             <button onClick={closePopup}>No</button>
-
           </div>
         </div>
-      )};
-      {successdel&& (
-          <div className="popup">
+      )}
+      ;
+      {successdel && (
+        <div className="popup">
           <div className="popup-content">
             <h3>Successfully Deleted</h3>
             <button onClick={reset}>BACK</button>
-            
           </div>
         </div>
       )}
-       {successadd&& (
-          <div className="popup">
+      {successadd && (
+        <div className="popup">
           <div className="popup-content">
             <h3>Successfully Added</h3>
             <button onClick={reset}>BACK</button>
-            
           </div>
         </div>
       )}
-      {successupdate&& (
-          <div className="popup">
+      {successupdate && (
+        <div className="popup">
           <div className="popup-content">
             <h3>Successfully Updated</h3>
             <button onClick={reset}>BACK</button>
-            
           </div>
         </div>
       )}
