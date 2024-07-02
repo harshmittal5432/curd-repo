@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({src}) {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             Curd Operation
@@ -24,12 +24,24 @@ function Navbar() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/">
-                  Curd
+                <span style={{ fontSize: "1.8rem" }}>Curd</span>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/ContactForm">
-                  Contact Us
+                <span style={{ fontSize: "1.8rem" }}>Contact Us</span>
+                </Link>
+              </li>
+            </ul>
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link" to="Profile">
+                  <img 
+                    src={src}
+                    alt="Profile" 
+                    className="rounded-circle" 
+                    style={{ width: "80px", height: "80px" }} 
+                  />
                 </Link>
               </li>
             </ul>
