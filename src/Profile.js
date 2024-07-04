@@ -1,29 +1,31 @@
-import React, { useRef,useState } from 'react';
-//import "./App.css";
+import React, { useState, useRef } from 'react';
+import ImageCropper from './ImageCropper';
 
 function Profile({ src, setSrc }) {
-  const fileInputRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
+  const fileInputRef = useRef(null);
 
-  const handleProfilePicChange = (event) => {
+  const handleProfilePicClick = () => {
+    setIsModalOpen(true);
+    setImageSrc(src); // Set current profile picture as imageSrc for cropping
+  };
+
+  const handleFileInputChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSrc(reader.result);
+        setIsModalOpen(true);
+        setImageSrc(reader.result); // Set selected file as imageSrc for cropping
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
-  const handleProfilePicClick = () => {
-    setIsModalOpen(true);
-  };
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const onCropComplete = (croppedImageUrl) => {
+    setSrc(croppedImageUrl); // Update profile picture with cropped image
+    setIsModalOpen(false); // Close cropping modal
   };
 
   return (
@@ -35,8 +37,8 @@ function Profile({ src, setSrc }) {
             src={src} 
             alt="Profile" 
             className="rounded-circle" 
-            style={{ width: "120px", height: "120px", marginBottom: "20px" }}
-            onClick={handleProfilePicClick} 
+            style={{ width: "120px", height: "120px", marginBottom: "20px", cursor: "pointer" }}
+            onClick={handleProfilePicClick} // Open cropping interface on click
           />
           <div>
             <p><strong>Name:</strong> Rahul Mittal</p>
@@ -46,7 +48,7 @@ function Profile({ src, setSrc }) {
           </div>
           <div className="change-profile-pic" style={{ marginTop: "20px" }}>
             <button 
-              onClick={handleButtonClick}
+              onClick={() => fileInputRef.current.click()}
               style={{ cursor: "pointer", color: "white", backgroundColor:"purple" }}
             >
               Change Profile Picture
@@ -56,18 +58,17 @@ function Profile({ src, setSrc }) {
               id="profilePicInput"
               type="file" 
               accept="image/*" 
-              onChange={handleProfilePicChange} 
+              onChange={handleFileInputChange} 
               style={{ display: "none" }}
             />
           </div>
         </div>
       </div>
       {isModalOpen && (
-        <div className="modal">
-          <span className="close" onClick={toggleModal}>&times;</span>
-          <img className="modal-content" src={src} alt="Profile Large" />
-          <div className="caption">Profile Picture</div>
-        </div>
+        <ImageCropper
+          imageSrc={imageSrc}
+          onCropComplete={onCropComplete}
+        />
       )}
     </div>
   );
