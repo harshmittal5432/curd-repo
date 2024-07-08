@@ -41,8 +41,8 @@ function Profile({ src, setSrc }) {
             onClick={handleProfilePicClick} // Open cropping interface on click
           />
           <div>
-            <p><strong>Name:</strong> Rahul Mittal</p>
-            <p><strong>Email:</strong> rm73487</p>
+            <p><strong>Name:</strong>ABCD</p>
+            <p><strong>Email:</strong> abcd1234@gmail.com</p>
             <p><strong>Location:</strong> India</p>
             {/* Add more profile information as needed */}
           </div>

@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 const CropContainer = styled.div`
   position: relative;
-  width: 100%;
-  height: 400px; /* Adjust height as needed */
+  width: 110%;
+  height: 400px; 
   background: #333;
 `;
 
